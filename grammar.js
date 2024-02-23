@@ -1,50 +1,79 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable camelcase */
+/* eslint-disable-next-line spaced-comment */
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 module.exports = grammar({
     name: "Nextflow",
 
+    word: ($) => $.identifier,
+
+    extras: ($) => [$.line_comment, $.block_comment, /\s/],
+
     rules: {
-        source_file: ($) => repeat($._definition),
+        config_file: ($) =>
+            repeat(choice($.assignment, $.include, $.scope_block)),
 
-        _definition: ($) =>
-            choice(
-                $.function_definition,
-                // TODO: other kinds of definitions
-            ),
-
-        function_definition: ($) =>
-            seq("func", $.identifier, $.parameter_list, $._type, $.block),
-
-        parameter_list: ($) =>
+        assignment: ($) =>
             seq(
-                "(",
-                // TODO: parameters
-                ")",
+                optional(repeat1(seq(field("scope", $.identifier), "."))),
+                field("name", $.identifier),
+                "=",
+                field("value", $.literal),
             ),
 
-        _type: ($) =>
+        include: ($) => seq("includeConfig", $.string_literal),
+
+        scope_block: ($) =>
+            seq(
+                optional(repeat1(seq(field("scope", $.identifier), "."))),
+                field("scope", $.identifier),
+                "{",
+                repeat(choice($.scope_block, $.assignment)),
+                "}",
+            ),
+
+        literal: ($) =>
             choice(
-                "bool",
-                // TODO: other kinds of types
+                $.string_literal,
+                $.boolean_literal,
+                $.numeric_literal,
+                $.null_literal,
             ),
 
-        block: ($) => seq("{", repeat($._statement), "}"),
+        string_literal: ($) =>
+            choice($.string_literal_single, $.string_literal_double),
 
-        _statement: ($) =>
-            choice(
-                $.return_statement,
-                // TODO: other kinds of statements
-            ),
+        string_literal_single: ($) =>
+            seq("'", repeat($.string_literal_fragment_single), "'"),
 
-        return_statement: ($) => seq("return", $._expression, ";"),
+        string_literal_double: ($) =>
+            seq('"', repeat($.string_literal_fragment_double), '"'),
 
-        _expression: ($) =>
-            choice(
-                $.identifier,
-                $.number,
-                // TODO: other kinds of expressions
-            ),
+        string_literal_fragment_single: ($) =>
+            token.immediate(prec(1, /[^'\\\n]+/)),
 
-        identifier: ($) => /[a-z]+/,
+        string_literal_fragment_double: ($) =>
+            token.immediate(prec(1, /[^"\\\n]+/)),
 
-        number: ($) => /\d+/,
+        null_literal: ($) => "null",
+
+        boolean_literal: ($) => choice("true", "false"),
+
+        numeric_literal: ($) => choice($.integer_literal, $.real_literal),
+
+        integer_literal: (_) => /[0-9]+/,
+
+        real_literal: (_) => /[0-9]+\.[0-9]+/,
+
+        identifier: (_) => /[A-Za-z_][A-Za-z0-9_]*/,
+
+        comment: ($) => choice($.line_comment, $.block_comment),
+
+        line_comment: ($) => token(prec(0, seq("//", /[^\n]*/))),
+
+        block_comment: ($) =>
+            token(prec(0, seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"))),
     },
 });
