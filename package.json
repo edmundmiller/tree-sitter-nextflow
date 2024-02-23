@@ -2,7 +2,7 @@
   "name": "tree-sitter-nextflow",
   "version": "0.1.0",
   "description": "Tree-sitter parser for Nextflow",
-  "main": "index.js",
+  "main": "bindings/node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/edmundmiller/tree-sitter-nextflow/issues"
   },
-  "homepage": "https://github.com/edmundmiller/tree-sitter-nextflow#readme"
+  "homepage": "https://github.com/edmundmiller/tree-sitter-nextflow#readme",
+  "dependencies": {
+    "nan": "^2.18.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.21.0"
+  }
 }
