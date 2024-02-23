@@ -1,7 +1,3 @@
-====================
-Classic hello world script in Nextflow language
-====================
-
 #!/usr/bin/env nextflow
 
 process sayHello {
@@ -18,8 +14,3 @@ process sayHello {
 workflow {
   Channel.of('Bonjour', 'Ciao', 'Hello', 'Hola') | sayHello | view
 }
-
---------------------
-
-(ERROR [0, 0] - [16, 0]
-  (ERROR [0, 0] - [15, 1]))
