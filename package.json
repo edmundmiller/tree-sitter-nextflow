@@ -1,0 +1,23 @@
+{
+  "name": "tree-sitter-nextflow",
+  "version": "0.1.0",
+  "description": "Tree-sitter parser for Nextflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edmundmiller/tree-sitter-nextflow.git"
+  },
+  "keywords": [
+    "Nextflow",
+    "tree-sitter"
+  ],
+  "author": "Edmund Miller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edmundmiller/tree-sitter-nextflow/issues"
+  },
+  "homepage": "https://github.com/edmundmiller/tree-sitter-nextflow#readme"
+}
