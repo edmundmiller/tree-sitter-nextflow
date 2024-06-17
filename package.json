@@ -10,10 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/edmundmiller/tree-sitter-nextflow.git"
   },
-  "keywords": [
-    "Nextflow",
-    "tree-sitter"
-  ],
+  "keywords": ["Nextflow", "tree-sitter"],
   "author": "Edmund Miller",
   "license": "MIT",
   "bugs": {
@@ -24,6 +21,7 @@
     "nan": "2.19.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "0.22.2"
+    "tree-sitter-cli": "0.22.2",
+    "tree-sitter-groovy": "github:murtaza64/tree-sitter-groovy"
   }
 }
