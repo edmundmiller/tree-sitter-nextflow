@@ -5,7 +5,7 @@
 // @ts-check
 
 module.exports = grammar({
-    name: "Nextflow",
+    name: "nextflow",
 
     word: ($) => $.identifier,
 
