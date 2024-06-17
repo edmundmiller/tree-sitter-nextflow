@@ -13,6 +13,12 @@
   "keywords": ["Nextflow", "tree-sitter"],
   "author": "Edmund Miller",
   "license": "MIT",
+  "tree-sitter": [
+    {
+      "scope": "source.nextflow",
+      "file-types": ["nextflow.config", "nf"]
+    }
+  ],
   "bugs": {
     "url": "https://github.com/edmundmiller/tree-sitter-nextflow/issues"
   },
