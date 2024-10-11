@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/edmundmiller/tree-sitter-nextflow#readme",
   "dependencies": {
-    "nan": "2.19.0"
+    "nan": "2.22.0"
   },
   "devDependencies": {
     "tree-sitter-cli": "0.22.2",
