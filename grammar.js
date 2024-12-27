@@ -21,7 +21,8 @@ module.exports = grammar({
       $.shebang,
       $.feature_flag,
       $.include,
-      $.parameter
+      $.parameter,
+      $.process_definition
     )),
 
     // Comments
@@ -116,6 +117,60 @@ module.exports = grammar({
     assignment_statement: $ => seq(
       $.identifier,
       '=',
+      $._expression,
+      ';'
+    ),
+
+    // Process definition
+    process_definition: $ => seq(
+      'process',
+      $.identifier,
+      '{',
+      repeat(choice(
+        $.input_block,
+        $.output_block,
+        $.script_block,
+        $.directive_block
+      )),
+      '}'
+    ),
+
+    input_block: $ => seq(
+      'input:',
+      repeat($.input_declaration)
+    ),
+
+    input_declaration: $ => seq(
+      choice('val', 'path', 'tuple', 'env', 'stdin'),
+      $.identifier,
+      optional(seq('from', $._expression)),
+      ';'
+    ),
+
+    output_block: $ => seq(
+      'output:',
+      repeat($.output_declaration)
+    ),
+
+    output_declaration: $ => seq(
+      choice('path', 'tuple', 'env', 'stdout'),
+      $.identifier,
+      optional(seq('into', $._expression)),
+      ';'
+    ),
+
+    script_block: $ => seq(
+      choice('script:', 'shell:', 'exec:'),
+      /[^}]*/  // This is a simplification - we'll need better script parsing later
+    ),
+
+    directive_block: $ => seq(
+      'directive:',
+      repeat($.directive)
+    ),
+
+    directive: $ => seq(
+      $.identifier,
       $._expression,
       ';'
     )
