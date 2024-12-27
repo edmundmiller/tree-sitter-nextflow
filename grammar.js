@@ -78,7 +78,9 @@ module.exports = grammar({
       $.identifier,
       $.number,
       $.string,
-      $.boolean
+      $.boolean,
+      $.channel_expression,
+      $.pipe_expression
     ),
 
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
@@ -180,7 +182,46 @@ module.exports = grammar({
       $.identifier,
       $._expression,
       ';'
-    )
+    ),
+
+    // Channel operations
+    channel_expression: $ => seq(
+      'Channel',
+      '.',
+      choice(
+        $.channel_from,
+        $.channel_value,
+        $.channel_of
+      )
+    ),
+
+    channel_from: $ => seq(
+      'from',
+      '(',
+      optional(commaSep1($._expression)),
+      ')'
+    ),
+
+    channel_value: $ => seq(
+      'value',
+      '(',
+      $._expression,
+      ')'
+    ),
+
+    channel_of: $ => seq(
+      'of',
+      '(',
+      optional(commaSep1($._expression)),
+      ')'
+    ),
+
+    // Pipeline operations
+    pipe_expression: $ => prec.left(1, seq(
+      $._expression,
+      '|',
+      $._expression
+    ))
   }
 });
 
