@@ -10,6 +10,48 @@
     "fields": {}
   },
   {
+    "type": "directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "directive_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "feature_flag",
     "named": true,
     "fields": {},
@@ -71,9 +113,93 @@
     }
   },
   {
+    "type": "input_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "input_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "input_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "output_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "output_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "output_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "parameter",
@@ -103,6 +229,57 @@
     }
   },
   {
+    "type": "process_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "directive_block",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "input_block",
+          "named": true
+        },
+        {
+          "type": "output_block",
+          "named": true
+        },
+        {
+          "type": "script_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "script_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "script_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "script_content",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "shebang",
     "named": true,
     "fields": {}
@@ -130,6 +307,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "process_definition",
           "named": true
         },
         {
@@ -185,11 +366,27 @@
     "named": false
   },
   {
+    "type": ";",
+    "named": false
+  },
+  {
     "type": "=",
     "named": false
   },
   {
     "type": "as",
+    "named": false
+  },
+  {
+    "type": "directive:",
+    "named": false
+  },
+  {
+    "type": "env",
+    "named": false
+  },
+  {
+    "type": "exec:",
     "named": false
   },
   {
@@ -209,7 +406,19 @@
     "named": false
   },
   {
+    "type": "input:",
+    "named": false
+  },
+  {
+    "type": "into",
+    "named": false
+  },
+  {
     "type": "nextflow",
+    "named": false
+  },
+  {
+    "type": "output:",
     "named": false
   },
   {
@@ -217,7 +426,39 @@
     "named": false
   },
   {
+    "type": "path",
+    "named": false
+  },
+  {
+    "type": "process",
+    "named": false
+  },
+  {
+    "type": "script:",
+    "named": false
+  },
+  {
+    "type": "shell:",
+    "named": false
+  },
+  {
+    "type": "stdin",
+    "named": false
+  },
+  {
+    "type": "stdout",
+    "named": false
+  },
+  {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "tuple",
+    "named": false
+  },
+  {
+    "type": "val",
     "named": false
   },
   {

@@ -154,14 +154,21 @@ module.exports = grammar({
 
     output_declaration: $ => seq(
       choice('path', 'tuple', 'env', 'stdout'),
-      $.identifier,
+      $._expression,
       optional(seq('into', $._expression)),
       ';'
     ),
 
     script_block: $ => seq(
       choice('script:', 'shell:', 'exec:'),
-      /[^}]*/  // This is a simplification - we'll need better script parsing later
+      $.script_content
+    ),
+
+    script_content: $ => choice(
+      seq('"""', /([^"]|"[^"]|""[^"])*/, '"""'),
+      seq("'''", /([^']|'[^']|''[^'])*/, "'''"),
+      seq('"', /[^"]*/, '"'),
+      seq("'", /[^']*/, "'")
     ),
 
     directive_block: $ => seq(

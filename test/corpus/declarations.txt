@@ -55,9 +55,7 @@ process FASTQC {
     path "fastqc_*" into fastqc_ch;
     
     script:
-    """
-    fastqc $reads
-    """
+    """fastqc $reads"""
 }
 
 ---
@@ -73,4 +71,5 @@ process FASTQC {
       (output_declaration
         (string)
         (identifier)))
-    (script_block)))
+    (script_block
+      (script_content))))
