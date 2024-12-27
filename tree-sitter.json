@@ -1,0 +1,38 @@
+{
+  "grammars": [
+    {
+      "name": "nextflow",
+      "camelcase": "Nextflow",
+      "scope": "source.nextflow",
+      "file-types": [
+        ".nf.test",
+        "nextflow.config",
+        ".nf"
+      ],
+      "injection-regex": "^nextflow$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "A parser for Nextflow from scratch",
+    "authors": [
+      {
+        "name": "Edmund Miller",
+        "email": "edmund@nf-co.re",
+        "url": "https://edmundmiller.dev/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/edmundmiller/tree-sitter-nextflow"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}
