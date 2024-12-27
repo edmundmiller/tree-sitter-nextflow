@@ -1,0 +1,30 @@
+==================
+Process definition
+==================
+
+process FASTQC {
+    input:
+    path reads from input_ch;
+    
+    output:
+    path "fastqc_*" into fastqc_ch;
+    
+    script:
+    """fastqc $reads"""
+}
+
+---
+
+(source_file
+  (process_definition
+    (identifier)
+    (input_block
+      (input_declaration
+        (identifier)
+        (identifier)))
+    (output_block
+      (output_declaration
+        (string)
+        (identifier)))
+    (script_block
+      (script_content))))

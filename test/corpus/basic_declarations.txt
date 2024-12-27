@@ -1,0 +1,30 @@
+==================
+Basic declarations
+==================
+
+#!/usr/bin/env nextflow
+
+nextflow.preview.topic = true
+
+include { foo, bar as baz } from './some/module'
+
+params.message = 'Hello world!'
+
+---
+
+(source_file
+  (shebang)
+  (feature_flag
+    (identifier)
+    (identifier)
+    (boolean))
+  (include
+    (include_item
+      (identifier))
+    (include_item
+      (identifier)
+      (identifier))
+    (string))
+  (parameter
+    (identifier)
+    (string)))
