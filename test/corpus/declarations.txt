@@ -6,7 +6,7 @@ Basic declarations
 
 nextflow.preview.topic = true
 
-include { foo ; bar as baz } from './some/module'
+include { foo, bar as baz } from './some/module'
 
 params.message = 'Hello world!'
 

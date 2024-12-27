@@ -21,13 +21,7 @@ module.exports = grammar({
       $.shebang,
       $.feature_flag,
       $.include,
-      $.parameter,
-      $.workflow,
-      $.process,
-      $.function,
-      $.enum_type,
-      $.output_block,
-      $.statement
+      $.parameter
     )),
 
     // Comments
@@ -100,7 +94,31 @@ module.exports = grammar({
       seq("'''", /[^']*/, "'''")
     ),
 
-    boolean: $ => choice('true', 'false')
+    boolean: $ => choice('true', 'false'),
+
+    // Helper functions
+    _block: $ => seq(
+      '{',
+      repeat($._statement),
+      '}'
+    ),
+
+    _statement: $ => choice(
+      $.expression_statement,
+      $.assignment_statement
+    ),
+
+    expression_statement: $ => seq(
+      $._expression,
+      ';'
+    ),
+
+    assignment_statement: $ => seq(
+      $.identifier,
+      '=',
+      $._expression,
+      ';'
+    )
   }
 });
 
