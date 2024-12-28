@@ -24,7 +24,8 @@ module.exports = grammar({
       $.parameter,
       $.process_definition,
       $.channel_expression,
-      $.pipe_expression
+      $.pipe_expression,
+      $.workflow_definition
     )),
 
     // Comments
@@ -237,6 +238,57 @@ module.exports = grammar({
       'it',
       '*',
       $._expression
+    ),
+
+    // Workflow definition
+    workflow_definition: $ => seq(
+      'workflow',
+      '{',
+      optional(seq(
+        repeat(choice(
+          $.workflow_input,
+          $.workflow_main,
+          $.workflow_emit,
+          $._expression,
+          $.process_invocation
+        ))
+      )),
+      '}'
+    ),
+
+    workflow_input: $ => seq(
+      'take:',
+      repeat1(seq(
+        $.identifier,
+        optional('\n')
+      ))
+    ),
+
+    workflow_main: $ => seq(
+      'main:',
+      repeat(choice(
+        $._expression,
+        $.process_invocation
+      ))
+    ),
+
+    workflow_emit: $ => seq(
+      'emit:',
+      repeat1(seq(
+        $.identifier,
+        '=',
+        choice(
+          $._expression,
+          $.process_invocation
+        )
+      ))
+    ),
+
+    process_invocation: $ => seq(
+      $.identifier,
+      '(',
+      optional(commaSep1($._expression)),
+      ')'
     )
   }
 });
