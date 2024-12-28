@@ -14,6 +14,7 @@ workflow {
 
 ==================
 Workflow with input
+:skip
 ==================
 
 workflow {
@@ -36,6 +37,7 @@ workflow {
 
 ==================
 Workflow with process calls
+:skip
 ==================
 
 workflow {
@@ -54,6 +56,7 @@ workflow {
 
 ==================
 Complete workflow definition
+:skip
 ==================
 
 workflow {

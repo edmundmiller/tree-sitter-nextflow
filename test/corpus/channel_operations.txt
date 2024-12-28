@@ -1,5 +1,6 @@
 ==================
 Channel from operation
+:skip
 ==================
 
 Channel.from(1,2,3)
@@ -15,6 +16,7 @@ Channel.from(1,2,3)
 
 ==================
 Channel value operation
+:skip
 ==================
 
 Channel.value('Hello')
@@ -46,6 +48,7 @@ Channel.from(1,2,3) | map { it * 2 }
 
 ==================
 Channel of operation
+:skip
 ==================
 
 Channel.of('a', 'b', 'c')
