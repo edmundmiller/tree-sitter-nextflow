@@ -22,7 +22,9 @@ module.exports = grammar({
       $.feature_flag,
       $.include,
       $.parameter,
-      $.process_definition
+      $.process_definition,
+      $.channel_expression,
+      $.pipe_expression
     )),
 
     // Comments
@@ -198,21 +200,21 @@ module.exports = grammar({
     channel_from: $ => seq(
       'from',
       '(',
-      optional(commaSep1($._expression)),
+      seq($._expression, repeat(seq(',', $._expression))),
       ')'
     ),
 
     channel_value: $ => seq(
       'value',
       '(',
-      $._expression,
+      optional($._expression),
       ')'
     ),
 
     channel_of: $ => seq(
       'of',
       '(',
-      optional(commaSep1($._expression)),
+      optional(seq($._expression, repeat(seq(',', $._expression)))),
       ')'
     ),
 
@@ -220,24 +222,21 @@ module.exports = grammar({
     pipe_expression: $ => prec.left(1, seq(
       $._expression,
       '|',
-      $.map_expression
+      choice(
+        $.identifier,
+        seq(
+          'map',
+          '{',
+          $.map_body,
+          '}'
+        )
+      )
     )),
 
-    map_expression: $ => seq(
-      'map',
-      $.closure
-    ),
-
-    closure: $ => seq(
-      '{',
-      $.closure_body,
-      '}'
-    ),
-
-    closure_body: $ => seq(
+    map_body: $ => seq(
       'it',
       '*',
-      $.number
+      $._expression
     )
   }
 });

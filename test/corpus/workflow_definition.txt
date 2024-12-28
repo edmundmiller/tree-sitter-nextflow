@@ -1,0 +1,89 @@
+==================
+Basic workflow declaration
+==================
+
+workflow {
+    "Hello world"
+}
+
+---
+
+(source_file
+  (workflow_definition
+    (string)))
+
+==================
+Workflow with input
+==================
+
+workflow {
+    take:
+        x
+        y
+    main:
+        "Processing ${x} and ${y}"
+}
+
+---
+
+(source_file
+  (workflow_definition
+    (workflow_input
+      (identifier)
+      (identifier))
+    (workflow_main
+      (string))))
+
+==================
+Workflow with process calls
+==================
+
+workflow {
+    PROCESS_A()
+    PROCESS_B()
+}
+
+---
+
+(source_file
+  (workflow_definition
+    (process_invocation
+      (identifier))
+    (process_invocation
+      (identifier))))
+
+==================
+Complete workflow definition
+==================
+
+workflow {
+    take:
+        reads
+        reference
+    
+    main:
+        ALIGN(reads, reference)
+        CALL_VARIANTS(ALIGN.out)
+    
+    emit:
+        variants = CALL_VARIANTS.out
+}
+
+---
+
+(source_file
+  (workflow_definition
+    (workflow_input
+      (identifier)
+      (identifier))
+    (workflow_main
+      (process_invocation
+        (identifier)
+        (identifier)
+        (identifier))
+      (process_invocation
+        (identifier)
+        (identifier)))
+    (workflow_emit
+      (identifier)
+      (identifier))))
