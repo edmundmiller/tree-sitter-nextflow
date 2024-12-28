@@ -1,10 +1,36 @@
 ==================
-TODO Channel operations
+Channel from operation
+==================
+
+Channel.from(1,2,3)
+
+---
+
+(source_file
+  (channel_expression
+    (channel_from
+      (number)
+      (number)
+      (number))))
+
+==================
+Channel value operation
+==================
+
+Channel.value('Hello')
+
+---
+
+(source_file
+  (channel_expression
+    (channel_value
+      (string))))
+
+==================
+Channel pipe operation
 ==================
 
 Channel.from(1,2,3) | map { it * 2 }
-Channel.value('Hello')
-Channel.of('a', 'b', 'c')
 
 ---
 
@@ -15,10 +41,17 @@ Channel.of('a', 'b', 'c')
         (number)
         (number)
         (number)))
-    (identifier))
-  (channel_expression
-    (channel_value
-      (string)))
+    (identifier)))
+
+==================
+Channel of operation
+==================
+
+Channel.of('a', 'b', 'c')
+
+---
+
+(source_file
   (channel_expression
     (channel_of
       (string)
