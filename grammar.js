@@ -220,8 +220,25 @@ module.exports = grammar({
     pipe_expression: $ => prec.left(1, seq(
       $._expression,
       '|',
-      $._expression
-    ))
+      $.map_expression
+    )),
+
+    map_expression: $ => seq(
+      'map',
+      $.closure
+    ),
+
+    closure: $ => seq(
+      '{',
+      $.closure_body,
+      '}'
+    ),
+
+    closure_body: $ => seq(
+      'it',
+      '*',
+      $.number
+    )
   }
 });
 
