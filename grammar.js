@@ -83,7 +83,9 @@ module.exports = grammar({
       $.string,
       $.boolean,
       $.channel_expression,
-      $.pipe_expression
+      $.pipe_expression,
+      $.map,
+      $.list
     ),
 
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
@@ -194,14 +196,15 @@ module.exports = grammar({
       choice(
         $.channel_from,
         $.channel_value,
-        $.channel_of
+        $.channel_of,
+        $.channel_from_list
       )
     ),
 
     channel_from: $ => seq(
       'from',
       '(',
-      seq($._expression, repeat(seq(',', $._expression))),
+      commaSep1($._expression),
       ')'
     ),
 
@@ -215,8 +218,37 @@ module.exports = grammar({
     channel_of: $ => seq(
       'of',
       '(',
-      optional(seq($._expression, repeat(seq(',', $._expression)))),
+      optional(commaSep1($._expression)),
       ')'
+    ),
+
+    channel_from_list: $ => seq(
+      'fromList',
+      '(',
+      $.list,
+      ')'
+    ),
+
+    list: $ => seq(
+      '[',
+      optional(commaSep1($._expression)),
+      ']'
+    ),
+
+    map: $ => seq(
+      '[',
+      commaSep1($.map_entry),
+      ']'
+    ),
+
+    map_entry: $ => seq(
+      choice(
+        $.identifier,
+        $.string,
+        $.number
+      ),
+      ':',
+      $._expression
     ),
 
     // Pipeline operations
@@ -225,19 +257,21 @@ module.exports = grammar({
       '|',
       choice(
         $.identifier,
-        seq(
-          'map',
-          '{',
-          $.map_body,
-          '}'
-        )
+        $.map_operation
       )
     )),
 
-    map_body: $ => seq(
-      'it',
+    map_operation: $ => seq(
+      'map',
+      $.closure
+    ),
+
+    closure: $ => seq(
+      '{',
+      $.identifier,
       '*',
-      $._expression
+      $._expression,
+      '}'
     ),
 
     // Workflow definition
@@ -298,7 +332,13 @@ module.exports = grammar({
       $.identifier,
       '.',
       'out'
-    )
+    ),
+
+    binary_expression: $ => prec.left(1, seq(
+      $._expression,
+      '*',
+      $._expression
+    ))
   }
 });
 
