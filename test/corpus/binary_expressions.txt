@@ -1,9 +1,6 @@
 ==================
-Binary expressions
+Basic arithmetic operators
 ==================
-
-Arithmetic operators
-------------------
 
 def a = 2 + 2
 def b = 10 - 5
@@ -45,8 +42,9 @@ def f = 2 ** 3
       (number)
       (number))))
 
+==================
 Comparison operators
-------------------
+==================
 
 def eq = x == y
 def neq = x != y
@@ -88,8 +86,9 @@ def gte = x >= y
       (identifier)
       (identifier))))
 
+==================
 Logical operators
-------------------
+==================
 
 def and = a && b
 def or = a || b
@@ -117,8 +116,9 @@ def complex = (x > 0) && (y < 10)
         (identifier)
         (number)))))
 
+==================
 Range operators
-------------------
+==================
 
 def inclusive = 1..5
 def exclusive = 1..<5
@@ -142,8 +142,9 @@ def var_range = start..end
       (identifier)
       (identifier))))
 
-Compound expressions
-------------------
+==================
+Operator precedence
+==================
 
 def compound1 = a + b * c
 def compound2 = (a + b) * c

@@ -1,9 +1,6 @@
 ==================
-Closure syntax
+Single parameter closure
 ==================
-
-Single parameter arrow closure
-----------------------------
 
 def square = { x -> x * x }
 ---
@@ -12,13 +9,15 @@ def square = { x -> x * x }
   (variable_declaration
     (identifier)
     (closure
-      (identifier)
+      (parameters
+        (identifier))
       (binary_expression
         (identifier)
         (identifier)))))
 
-Multiple parameter arrow closure
-----------------------------
+==================
+Multiple parameter closure
+==================
 
 def add = { a, b -> a + b }
 ---
@@ -34,8 +33,9 @@ def add = { a, b -> a + b }
         (identifier)
         (identifier)))))
 
+==================
 Multi-line closure with statements
-----------------------------
+==================
 
 def process = { v ->
     println 'Hello!'
@@ -48,7 +48,8 @@ def process = { v ->
   (variable_declaration
     (identifier)
     (closure
-      (identifier)
+      (parameters
+        (identifier))
       (block
         (function_call
           (identifier)
@@ -60,8 +61,9 @@ def process = { v ->
           (identifier)
           (identifier))))))
 
-Closure with expressions and return value
-----------------------------
+==================
+Closure with variable declarations
+==================
 
 def compute = { x, y ->
     def result = x + y
