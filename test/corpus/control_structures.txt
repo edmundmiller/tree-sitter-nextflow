@@ -1,0 +1,111 @@
+==================
+If else statements
+:skip
+==================
+
+if (x > 5) {
+    println "greater"
+} else if (x < 0) {
+    println "negative"
+} else {
+    println "other"
+}
+
+---
+
+(source_file
+  (if_statement
+    (binary_expression)
+    (block
+      (expression_statement))
+    (else_if_clause
+      (binary_expression)
+      (block
+        (expression_statement)))
+    (else_clause
+      (block
+        (expression_statement)))))
+
+==================
+For loops
+:skip
+==================
+
+for (i in 1..10) {
+    println i
+}
+
+items = ['a', 'b', 'c']
+for (item in items) {
+    println item
+}
+
+---
+
+(source_file
+  (for_statement
+    (range_expression)
+    (block
+      (expression_statement)))
+  (assignment
+    (identifier)
+    (list))
+  (for_statement
+    (identifier)
+    (block
+      (expression_statement))))
+
+==================
+While loops
+:skip
+==================
+
+count = 0
+while (count < 5) {
+    println count
+    count++
+}
+
+---
+
+(source_file
+  (assignment
+    (identifier)
+    (number))
+  (while_statement
+    (binary_expression)
+    (block
+      (expression_statement)
+      (unary_expression))))
+
+==================
+Switch case
+:skip
+==================
+
+switch(x) {
+    case 1:
+        println 'one'
+        break
+    case 2:
+        println 'two'
+        break
+    default:
+        println 'other'
+}
+
+---
+
+(source_file
+  (switch_statement
+    (identifier)
+    (case_clause
+      (number)
+      (expression_statement)
+      (break_statement))
+    (case_clause
+      (number)
+      (expression_statement)
+      (break_statement))
+    (default_clause
+      (expression_statement)))) 
