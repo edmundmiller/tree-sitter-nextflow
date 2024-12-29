@@ -88,7 +88,8 @@ module.exports = grammar({
       $.pipe_expression,
       $.map,
       $.list,
-      $.binary_expression
+      $.binary_expression,
+      seq('(', $._expression, ')')
     ),
 
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
@@ -324,12 +325,12 @@ module.exports = grammar({
       $.process_output
     ),
 
-    process_invocation: $ => seq(
+    process_invocation: $ => prec(2, seq(
       $.identifier,
       '(',
       optional(commaSep1(choice($._expression, $.process_output))),
       ')'
-    ),
+    )),
 
     process_output: $ => seq(
       $.identifier,
@@ -337,11 +338,13 @@ module.exports = grammar({
       'out'
     ),
 
-    binary_expression: $ => prec.left(1, seq(
-      $._expression,
-      choice('+', '-', '*', '/', '%', '**', '==', '!=', '<', '>', '<=', '>=', '&&', '||'),
-      $._expression
-    )),
+    binary_expression: $ => choice(
+      prec.left(1, seq($._expression, choice('&&', '||'), $._expression)),
+      prec.left(2, seq($._expression, choice('==', '!=', '<', '>', '<=', '>='), $._expression)),
+      prec.left(3, seq($._expression, choice('+', '-'), $._expression)),
+      prec.left(4, seq($._expression, choice('*', '/', '%'), $._expression)),
+      prec.right(5, seq($._expression, '**', $._expression))
+    ),
 
     // Variable declarations
     variable_declaration: $ => seq(
