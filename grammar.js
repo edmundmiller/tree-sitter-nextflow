@@ -25,7 +25,9 @@ module.exports = grammar({
       $.process_definition,
       $.channel_expression,
       $.pipe_expression,
-      $.workflow_definition
+      $.workflow_definition,
+      $.variable_declaration,
+      $.assignment
     )),
 
     // Comments
@@ -85,7 +87,8 @@ module.exports = grammar({
       $.channel_expression,
       $.pipe_expression,
       $.map,
-      $.list
+      $.list,
+      $.binary_expression
     ),
 
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
@@ -336,9 +339,23 @@ module.exports = grammar({
 
     binary_expression: $ => prec.left(1, seq(
       $._expression,
-      '*',
+      choice('+', '-', '*', '/', '%', '**', '==', '!=', '<', '>', '<=', '>=', '&&', '||'),
       $._expression
-    ))
+    )),
+
+    // Variable declarations
+    variable_declaration: $ => seq(
+      'def',
+      $.identifier,
+      '=',
+      $._expression
+    ),
+
+    assignment: $ => seq(
+      $.identifier,
+      '=',
+      $._expression
+    )
   }
 });
 

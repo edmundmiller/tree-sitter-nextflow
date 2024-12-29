@@ -1,5 +1,99 @@
 [
   {
+    "type": "assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "binary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "boolean",
     "named": true,
     "fields": {}
@@ -39,6 +133,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
         {
           "type": "boolean",
           "named": true
@@ -98,6 +196,10 @@
       "required": false,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -141,6 +243,10 @@
       "required": false,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -183,6 +289,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
         {
           "type": "boolean",
           "named": true
@@ -231,6 +341,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
         {
           "type": "boolean",
           "named": true
@@ -366,6 +480,10 @@
       "required": true,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -408,6 +526,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
         {
           "type": "boolean",
           "named": true
@@ -466,6 +588,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
         {
           "type": "boolean",
           "named": true
@@ -545,6 +671,10 @@
       "required": true,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -588,6 +718,10 @@
       "required": true,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -630,6 +764,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
         {
           "type": "boolean",
           "named": true
@@ -708,6 +846,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
         {
           "type": "boolean",
           "named": true
@@ -797,6 +939,10 @@
       "required": false,
       "types": [
         {
+          "type": "assignment",
+          "named": true
+        },
+        {
           "type": "channel_expression",
           "named": true
         },
@@ -829,6 +975,10 @@
           "named": true
         },
         {
+          "type": "variable_declaration",
+          "named": true
+        },
+        {
           "type": "workflow_definition",
           "named": true
         }
@@ -841,6 +991,53 @@
     "fields": {}
   },
   {
+    "type": "variable_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "workflow_body",
     "named": true,
     "fields": {},
@@ -848,6 +1045,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
         {
           "type": "boolean",
           "named": true
@@ -927,6 +1128,10 @@
       "required": true,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -993,6 +1198,10 @@
       "required": true,
       "types": [
         {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -1036,6 +1245,10 @@
     }
   },
   {
+    "type": "!=",
+    "named": false
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -1045,6 +1258,14 @@
   },
   {
     "type": "#!",
+    "named": false
+  },
+  {
+    "type": "%",
+    "named": false
+  },
+  {
+    "type": "&&",
     "named": false
   },
   {
@@ -1068,7 +1289,19 @@
     "named": false
   },
   {
+    "type": "**",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
     "named": false
   },
   {
@@ -1096,7 +1329,27 @@
     "named": false
   },
   {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
     "type": "=",
+    "named": false
+  },
+  {
+    "type": "==",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
     "named": false
   },
   {
@@ -1113,6 +1366,10 @@
   },
   {
     "type": "as",
+    "named": false
+  },
+  {
+    "type": "def",
     "named": false
   },
   {
@@ -1241,6 +1498,10 @@
   },
   {
     "type": "|",
+    "named": false
+  },
+  {
+    "type": "||",
     "named": false
   },
   {
