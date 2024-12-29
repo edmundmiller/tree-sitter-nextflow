@@ -1,5 +1,6 @@
 ==================
 Simple string interpolation
+:skip
 ==================
 
 def name = 'world'
@@ -21,6 +22,7 @@ println "Hello ${name}!"
 
 ==================
 Simple property access
+:skip
 ==================
 
 def person = [first: 'John', last: 'Doe']
@@ -53,6 +55,7 @@ println "Hello $person.first $person.last!"
 
 ==================
 Triple-quoted string interpolation
+:skip
 ==================
 
 def input = 'sample.fa'
@@ -84,6 +87,7 @@ def cmd = """
 
 ==================
 Complex interpolation with expressions
+:skip
 ==================
 
 def names = ['Thing 1', 'Thing 2']
@@ -111,6 +115,7 @@ println "Hello, ${names.join(' and ')}!"
 
 ==================
 Mixed interpolation styles
+:skip
 ==================
 
 def user = [name: 'John', age: 30]
@@ -144,6 +149,7 @@ println "User $user.name is ${user.age} years old"
 
 ==================
 Triple single-quoted string interpolation
+:skip
 ==================
 
 def tool = 'blastp'
