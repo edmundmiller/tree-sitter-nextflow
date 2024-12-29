@@ -1,0 +1,87 @@
+==================
+Closure syntax
+==================
+
+Single parameter arrow closure
+----------------------------
+
+def square = { x -> x * x }
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (closure
+      (identifier)
+      (binary_expression
+        (identifier)
+        (identifier)))))
+
+Multiple parameter arrow closure
+----------------------------
+
+def add = { a, b -> a + b }
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (closure
+      (parameters
+        (identifier)
+        (identifier))
+      (binary_expression
+        (identifier)
+        (identifier)))))
+
+Multi-line closure with statements
+----------------------------
+
+def process = { v ->
+    println 'Hello!'
+    println "Processing value"
+    v * v
+}
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (closure
+      (identifier)
+      (block
+        (function_call
+          (identifier)
+          (string))
+        (function_call
+          (identifier)
+          (string))
+        (binary_expression
+          (identifier)
+          (identifier))))))
+
+Closure with expressions and return value
+----------------------------
+
+def compute = { x, y ->
+    def result = x + y
+    result * 2
+}
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (closure
+      (parameters
+        (identifier)
+        (identifier))
+      (block
+        (variable_declaration
+          (identifier)
+          (binary_expression
+            (identifier)
+            (identifier)))
+        (binary_expression
+          (identifier)
+          (number)))))) 
