@@ -252,14 +252,14 @@ module.exports = grammar({
       seq($.workflow_input, optional($.workflow_main), optional($.workflow_emit)),
       seq($.workflow_main, optional($.workflow_emit)),
       $.workflow_emit,
-      repeat1(seq($._workflow_statement, ';'))
+      repeat1($._workflow_statement)
     ),
 
     workflow_input: $ => prec.right(2, seq(
       'take:',
       repeat1(seq(
         $.identifier,
-        ';'
+        optional(';')
       ))
     )),
 
@@ -267,7 +267,7 @@ module.exports = grammar({
       'main:',
       repeat1(seq(
         $._workflow_statement,
-        ';'
+        optional(';')
       ))
     )),
 
@@ -277,7 +277,7 @@ module.exports = grammar({
         $.identifier,
         '=',
         $._workflow_statement,
-        ';'
+        optional(';')
       ))
     )),
 
