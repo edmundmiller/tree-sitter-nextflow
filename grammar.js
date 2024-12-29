@@ -252,7 +252,7 @@ module.exports = grammar({
       seq($.workflow_input, optional($.workflow_main), optional($.workflow_emit)),
       seq($.workflow_main, optional($.workflow_emit)),
       $.workflow_emit,
-      repeat1($._workflow_statement)
+      repeat1(seq($._workflow_statement, ';'))
     ),
 
     workflow_input: $ => prec.right(2, seq(
@@ -283,15 +283,21 @@ module.exports = grammar({
 
     _workflow_statement: $ => choice(
       $._expression,
-      $.process_invocation
+      $.process_invocation,
+      $.process_output
     ),
 
     process_invocation: $ => seq(
       $.identifier,
       '(',
-      optional(commaSep1($._expression)),
-      ')',
-      optional(seq('.', 'out'))
+      optional(commaSep1(choice($._expression, $.process_output))),
+      ')'
+    ),
+
+    process_output: $ => seq(
+      $.identifier,
+      '.',
+      'out'
     )
   }
 });

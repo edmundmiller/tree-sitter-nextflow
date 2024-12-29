@@ -3,7 +3,7 @@ Basic workflow declaration
 ==================
 
 workflow {
-    "Hello world"
+    "Hello world";
 }
 
 ---
@@ -22,7 +22,7 @@ workflow {
         x;
         y;
     main:
-        "Processing ${x} and ${y}"
+        "Processing ${x} and ${y}";
 }
 
 ---
@@ -41,8 +41,8 @@ Workflow with process calls
 ==================
 
 workflow {
-    PROCESS_A()
-    PROCESS_B()
+    PROCESS_A();
+    PROCESS_B();
 }
 
 ---
@@ -87,7 +87,9 @@ workflow {
           (identifier))
         (process_invocation
           (identifier)
-          (identifier)))
+          (process_output
+            (identifier))))
       (workflow_emit
         (identifier)
-        (identifier)))))
+        (process_output
+          (identifier))))))

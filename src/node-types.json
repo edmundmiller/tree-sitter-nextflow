@@ -522,7 +522,26 @@
           "named": true
         },
         {
+          "type": "process_output",
+          "named": true
+        },
+        {
           "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "process_output",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -639,6 +658,10 @@
           "named": true
         },
         {
+          "type": "process_output",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -705,6 +728,10 @@
           "named": true
         },
         {
+          "type": "process_output",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         }
@@ -756,6 +783,10 @@
         },
         {
           "type": "process_invocation",
+          "named": true
+        },
+        {
+          "type": "process_output",
           "named": true
         },
         {
