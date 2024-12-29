@@ -244,51 +244,54 @@ module.exports = grammar({
     workflow_definition: $ => seq(
       'workflow',
       '{',
-      optional(seq(
-        repeat(choice(
-          $.workflow_input,
-          $.workflow_main,
-          $.workflow_emit,
-          $._expression,
-          $.process_invocation
-        ))
-      )),
+      optional($.workflow_body),
       '}'
     ),
 
-    workflow_input: $ => seq(
+    workflow_body: $ => choice(
+      seq($.workflow_input, optional($.workflow_main), optional($.workflow_emit)),
+      seq($.workflow_main, optional($.workflow_emit)),
+      $.workflow_emit,
+      repeat1($._workflow_statement)
+    ),
+
+    workflow_input: $ => prec.right(2, seq(
       'take:',
       repeat1(seq(
         $.identifier,
-        optional('\n')
+        ';'
       ))
-    ),
+    )),
 
-    workflow_main: $ => seq(
+    workflow_main: $ => prec.right(2, seq(
       'main:',
-      repeat(choice(
-        $._expression,
-        $.process_invocation
+      repeat1(seq(
+        $._workflow_statement,
+        ';'
       ))
-    ),
+    )),
 
-    workflow_emit: $ => seq(
+    workflow_emit: $ => prec.right(2, seq(
       'emit:',
       repeat1(seq(
         $.identifier,
         '=',
-        choice(
-          $._expression,
-          $.process_invocation
-        )
+        $._workflow_statement,
+        ';'
       ))
+    )),
+
+    _workflow_statement: $ => choice(
+      $._expression,
+      $.process_invocation
     ),
 
     process_invocation: $ => seq(
       $.identifier,
       '(',
       optional(commaSep1($._expression)),
-      ')'
+      ')',
+      optional(seq('.', 'out'))
     )
   }
 });

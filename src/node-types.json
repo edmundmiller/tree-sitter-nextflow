@@ -33,7 +33,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "boolean",
@@ -103,7 +103,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "boolean",
@@ -299,6 +299,41 @@
     }
   },
   {
+    "type": "map_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number",
     "named": true,
     "fields": {}
@@ -409,6 +444,10 @@
           "named": true
         },
         {
+          "type": "map_body",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
@@ -455,6 +494,41 @@
     }
   },
   {
+    "type": "process_invocation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "script_block",
     "named": true,
     "fields": {},
@@ -489,6 +563,10 @@
       "required": false,
       "types": [
         {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -505,11 +583,19 @@
           "named": true
         },
         {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
           "type": "process_definition",
           "named": true
         },
         {
           "type": "shebang",
+          "named": true
+        },
+        {
+          "type": "workflow_definition",
           "named": true
         }
       ]
@@ -519,6 +605,165 @@
     "type": "string",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "workflow_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
+          "type": "process_invocation",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "workflow_emit",
+          "named": true
+        },
+        {
+          "type": "workflow_input",
+          "named": true
+        },
+        {
+          "type": "workflow_main",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "workflow_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "workflow_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "workflow_emit",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
+          "type": "process_invocation",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "workflow_input",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "workflow_main",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "channel_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pipe_expression",
+          "named": true
+        },
+        {
+          "type": "process_invocation",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "\"",
@@ -546,6 +791,10 @@
   },
   {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
     "named": false
   },
   {
@@ -589,6 +838,10 @@
     "named": false
   },
   {
+    "type": "emit:",
+    "named": false
+  },
+  {
     "type": "env",
     "named": false
   },
@@ -621,11 +874,27 @@
     "named": false
   },
   {
+    "type": "it",
+    "named": false
+  },
+  {
+    "type": "main:",
+    "named": false
+  },
+  {
+    "type": "map",
+    "named": false
+  },
+  {
     "type": "nextflow",
     "named": false
   },
   {
     "type": "of",
+    "named": false
+  },
+  {
+    "type": "out",
     "named": false
   },
   {
@@ -661,6 +930,10 @@
     "named": false
   },
   {
+    "type": "take:",
+    "named": false
+  },
+  {
     "type": "true",
     "named": false
   },
@@ -674,6 +947,10 @@
   },
   {
     "type": "value",
+    "named": false
+  },
+  {
+    "type": "workflow",
     "named": false
   },
   {

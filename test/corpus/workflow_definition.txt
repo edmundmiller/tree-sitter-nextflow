@@ -10,17 +10,17 @@ workflow {
 
 (source_file
   (workflow_definition
-    (string)))
+    (workflow_body
+      (string))))
 
 ==================
 Workflow with input
-:skip
 ==================
 
 workflow {
     take:
-        x
-        y
+        x;
+        y;
     main:
         "Processing ${x} and ${y}"
 }
@@ -29,15 +29,15 @@ workflow {
 
 (source_file
   (workflow_definition
-    (workflow_input
-      (identifier)
-      (identifier))
-    (workflow_main
-      (string))))
+    (workflow_body
+      (workflow_input
+        (identifier)
+        (identifier))
+      (workflow_main
+        (string)))))
 
 ==================
 Workflow with process calls
-:skip
 ==================
 
 workflow {
@@ -49,44 +49,45 @@ workflow {
 
 (source_file
   (workflow_definition
-    (process_invocation
-      (identifier))
-    (process_invocation
-      (identifier))))
+    (workflow_body
+      (process_invocation
+        (identifier))
+      (process_invocation
+        (identifier)))))
 
 ==================
 Complete workflow definition
-:skip
 ==================
 
 workflow {
     take:
-        reads
-        reference
+        reads;
+        reference;
     
     main:
-        ALIGN(reads, reference)
-        CALL_VARIANTS(ALIGN.out)
+        ALIGN(reads, reference);
+        CALL_VARIANTS(ALIGN.out);
     
     emit:
-        variants = CALL_VARIANTS.out
+        variants = CALL_VARIANTS.out;
 }
 
 ---
 
 (source_file
   (workflow_definition
-    (workflow_input
-      (identifier)
-      (identifier))
-    (workflow_main
-      (process_invocation
-        (identifier)
+    (workflow_body
+      (workflow_input
         (identifier)
         (identifier))
-      (process_invocation
+      (workflow_main
+        (process_invocation
+          (identifier)
+          (identifier)
+          (identifier))
+        (process_invocation
+          (identifier)
+          (identifier)))
+      (workflow_emit
         (identifier)
-        (identifier)))
-    (workflow_emit
-      (identifier)
-      (identifier))))
+        (identifier)))))
