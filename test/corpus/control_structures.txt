@@ -1,6 +1,5 @@
 ==================
 If else statements
-:skip
 ==================
 
 if (x > 5) {
@@ -109,3 +108,18 @@ switch(x) {
       (break_statement))
     (default_clause
       (expression_statement)))) 
+
+=================
+Command conflicts
+=================
+
+foo = bar "baz"
+
+---
+
+(source_file
+  (assignment
+    (identifier)
+    (command_expression
+      (identifier)
+      (string)))) 
