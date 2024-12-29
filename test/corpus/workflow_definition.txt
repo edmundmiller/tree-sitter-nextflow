@@ -3,7 +3,7 @@ Basic workflow declaration
 ==================
 
 workflow {
-    "Hello world";
+    "Hello world"
 }
 
 ---
@@ -19,10 +19,11 @@ Workflow with input
 
 workflow {
     take:
-        x;
-        y;
+    x
+    y
+
     main:
-        "Processing ${x} and ${y}";
+    println "Processing ${x} and ${y}"
 }
 
 ---
@@ -41,8 +42,8 @@ Workflow with process calls
 ==================
 
 workflow {
-    PROCESS_A();
-    PROCESS_B();
+    PROCESS_A()
+    PROCESS_B()
 }
 
 ---
@@ -61,15 +62,15 @@ Complete workflow definition
 
 workflow {
     take:
-        reads;
-        reference;
+    reads
+    reference
     
     main:
-        ALIGN(reads, reference);
-        CALL_VARIANTS(ALIGN.out);
+    ALIGN(reads, reference)
+    CALL_VARIANTS(ALIGN.out)
     
     emit:
-        variants = CALL_VARIANTS.out;
+    variants = CALL_VARIANTS.out
 }
 
 ---
