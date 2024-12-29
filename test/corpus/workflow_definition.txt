@@ -19,10 +19,11 @@ Workflow with input
 
 workflow {
     take:
-        x
-        y
+    x
+    y
+
     main:
-        "Processing ${x} and ${y}"
+    "Processing ${x} and ${y}"
 }
 
 ---
@@ -61,15 +62,15 @@ Complete workflow definition
 
 workflow {
     take:
-        reads
-        reference
+    reads
+    reference
     
     main:
-        ALIGN(reads, reference)
-        CALL_VARIANTS(ALIGN.out)
+    ALIGN(reads, reference)
+    CALL_VARIANTS(ALIGN.out)
     
     emit:
-        variants = CALL_VARIANTS.out
+    variants = CALL_VARIANTS.out
 }
 
 ---
