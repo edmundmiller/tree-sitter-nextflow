@@ -343,7 +343,8 @@ module.exports = grammar({
       prec.left(2, seq($._expression, choice('==', '!=', '<', '>', '<=', '>='), $._expression)),
       prec.left(3, seq($._expression, choice('+', '-'), $._expression)),
       prec.left(4, seq($._expression, choice('*', '/', '%'), $._expression)),
-      prec.right(5, seq($._expression, '**', $._expression))
+      prec.right(5, seq($._expression, '**', $._expression)),
+      prec.left(6, seq($._expression, choice('..', '..<'), $._expression))
     ),
 
     // Variable declarations
