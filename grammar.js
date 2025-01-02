@@ -10,6 +10,12 @@
 module.exports = grammar({
   name: "nextflow",
 
+  // Telling Tree-sitter that command_expression and _expression can conflict
+  // helps the parser disambiguate cases like "foo = bar baz"
+  conflicts: $ => [
+    [ $._expression, $.command_expression ]
+  ],
+
   extras: $ => [
     /\s/,
     $.comment
@@ -27,7 +33,8 @@ module.exports = grammar({
       $.pipe_expression,
       $.workflow_definition,
       $.variable_declaration,
-      $.assignment
+      $.assignment,
+      $.if_statement
     )),
 
     // Comments
@@ -109,20 +116,18 @@ module.exports = grammar({
     boolean: $ => choice('true', 'false'),
 
     // Helper functions
-    _block: $ => seq(
-      '{',
-      repeat($._statement),
-      '}'
-    ),
-
     _statement: $ => choice(
       $.expression_statement,
-      $.assignment_statement
+      $.assignment_statement,
+      $.if_statement
     ),
 
     expression_statement: $ => seq(
-      $._expression,
-      ';'
+      choice(
+        $._expression,
+        $.command_expression
+      ),
+      optional(';')
     ),
 
     assignment_statement: $ => seq(
@@ -339,12 +344,19 @@ module.exports = grammar({
     ),
 
     binary_expression: $ => choice(
-      prec.left(1, seq($._expression, choice('&&', '||'), $._expression)),
-      prec.left(2, seq($._expression, choice('==', '!=', '<', '>', '<=', '>='), $._expression)),
-      prec.left(3, seq($._expression, choice('+', '-'), $._expression)),
-      prec.left(4, seq($._expression, choice('*', '/', '%'), $._expression)),
-      prec.right(5, seq($._expression, '**', $._expression)),
-      prec.left(6, seq($._expression, choice('..', '..<'), $._expression))
+      prec.left(2, seq(
+        $._expression,
+        choice(
+          '>', '<', '>=', '<=',
+          '==', '!=',
+          '&&', '||',
+          '+', '-',
+          '*', '/', '%',
+          '**',
+          '..', '..<'
+        ),
+        $._expression
+      ))
     ),
 
     // Variable declarations
@@ -359,6 +371,43 @@ module.exports = grammar({
       $.identifier,
       '=',
       $._expression
+    ),
+
+    if_statement: $ => seq(
+      'if',
+      '(',
+      $._expression,
+      ')',
+      $.block,
+      repeat($.else_if_clause),
+      optional($.else_clause)
+    ),
+
+    else_if_clause: $ => seq(
+      'else',
+      'if',
+      '(',
+      $._expression,
+      ')',
+      $.block
+    ),
+
+    else_clause: $ => seq(
+      'else',
+      $.block
+    ),
+
+    block: $ => seq(
+      '{',
+      repeat($._statement),
+      '}'
+    ),
+
+    // A simple command-like expression to handle Groovy-style println statements
+    // e.g. println "hello"
+    command_expression: $ => seq(
+      $.identifier,
+      $.string
     )
   }
 });

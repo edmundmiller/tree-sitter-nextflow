@@ -14,16 +14,29 @@ if (x > 5) {
 
 (source_file
   (if_statement
-    (binary_expression)
+    (binary_expression
+      (identifier)
+      (number))
     (block
-      (expression_statement))
+      (expression_statement
+        (command_expression
+          (identifier)
+          (string))))
     (else_if_clause
-      (binary_expression)
+      (binary_expression
+        (identifier)
+        (number))
       (block
-        (expression_statement)))
+        (expression_statement
+          (command_expression
+            (identifier)
+            (string)))))
     (else_clause
       (block
-        (expression_statement)))))
+        (expression_statement
+          (command_expression
+            (identifier)
+            (string)))))))
 
 ==================
 For loops
