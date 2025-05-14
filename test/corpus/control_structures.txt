@@ -136,3 +136,42 @@ foo = bar "baz"
     (command_expression
       (identifier)
       (string)))) 
+
+=================
+Operator precedence
+=================
+
+def a = x + y * z
+def b = x * y + z
+def c = (1 + x) * y + 5 * z + 3
+
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (binary_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (identifier))))
+  (variable_declaration
+    (identifier)
+    (binary_expression
+      (binary_expression
+        (identifier)
+        (identifier))
+      (identifier)))
+  (variable_declaration
+    (identifier)
+    (binary_expression
+      (binary_expression
+        (binary_expression
+          (binary_expression
+            (number)
+            (identifier))
+          (identifier))
+        (binary_expression
+          (number)
+          (identifier)))
+      (number)))) 

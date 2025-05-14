@@ -133,7 +133,10 @@ module.exports = grammar({
     assignment_statement: $ => seq(
       $.identifier,
       '=',
-      $._expression,
+      choice(
+        $._expression,
+        $.command_expression
+      ),
       ';'
     ),
 
@@ -344,19 +347,18 @@ module.exports = grammar({
     ),
 
     binary_expression: $ => choice(
-      prec.left(2, seq(
-        $._expression,
-        choice(
-          '>', '<', '>=', '<=',
-          '==', '!=',
-          '&&', '||',
-          '+', '-',
-          '*', '/', '%',
-          '**',
-          '..', '..<'
-        ),
-        $._expression
-      ))
+      // Logical operators have lowest precedence
+      prec.left(1, seq($._expression, choice('&&', '||'), $._expression)),
+      // Comparison operators
+      prec.left(2, seq($._expression, choice('==', '!=', '<', '>', '<=', '>='), $._expression)),
+      // Addition and subtraction
+      prec.left(3, seq($._expression, choice('+', '-'), $._expression)),
+      // Multiplication, division, modulo
+      prec.left(4, seq($._expression, choice('*', '/', '%'), $._expression)),
+      // Exponentiation has right associativity
+      prec.right(5, seq($._expression, '**', $._expression)),
+      // Range operators
+      prec.left(6, seq($._expression, choice('..', '..<'), $._expression))
     ),
 
     // Variable declarations
@@ -370,7 +372,10 @@ module.exports = grammar({
     assignment: $ => seq(
       $.identifier,
       '=',
-      $._expression
+      choice(
+        $._expression,
+        $.command_expression
+      )
     ),
 
     if_statement: $ => seq(
